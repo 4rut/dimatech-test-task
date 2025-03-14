@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>ArmenApp Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>ArmenApp Dashboard</h1>
+      <nav>
+        <button onclick="showSection('home')">Главная</button>
+        <button onclick="showSection('user')">Пользователь</button>
+        <button onclick="showSection('admin')">Администратор</button>
+        <button onclick="showSection('webhook')">Webhook</button>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <section id="home">
+        <h2>Добро пожаловать!</h2>
+        <p>Выберите нужный раздел в меню.</p>
+      </section>
+      <section id="user" class="hidden">
+        <h2>Пользователь</h2>
+        <div class="card">
+          <h3>Авторизация пользователя</h3>
+          <form onsubmit="userLogin(event)">
+            <label>Email:
+              <input type="email" id="user-email" required>
+            </label>
+            <label>Пароль:
+              <input type="password" id="user-password" required>
+            </label>
+            <button type="submit">Войти</button>
+          </form>
+        </div>
+        <div id="user-data" class="card hidden">
+          <h3>Данные пользователя</h3>
+          <p id="user-info"></p>
+          <button onclick="fetchUserAccounts()">Получить счета</button>
+          <ul id="accounts-list"></ul>
+          <button onclick="fetchUserPayments()">Получить платежи</button>
+          <ul id="payments-list"></ul>
+        </div>
+      </section>
+      <section id="admin" class="hidden">
+        <h2>Администратор</h2>
+        <div class="card">
+          <h3>Авторизация администратора</h3>
+          <form onsubmit="adminLogin(event)">
+            <label>Email:
+              <input type="email" id="admin-email" required>
+            </label>
+            <label>Пароль:
+              <input type="password" id="admin-password" required>
+            </label>
+            <button type="submit">Войти</button>
+          </form>
+        </div>
+        <div id="admin-data" class="card hidden">
+          <h3>Список пользователей</h3>
+          <p id="admin-info"></p>
+          <button onclick="fetchUsers()">Получить список пользователей</button>
+          <ul id="users-list"></ul>
+        </div>
+      </section>
+      <section id="webhook" class="hidden">
+        <h2>Тестирование Webhook</h2>
+        <div class="card">
+          <form onsubmit="sendWebhook(event)">
+            <label>Transaction ID:
+              <input type="text" id="wh-transaction-id" required>
+            </label>
+            <label>User ID:
+              <input type="number" id="wh-user-id" required min="0">
+            </label>
+            <label>Account ID:
+              <input type="number" id="wh-account-id" required min="0">
+            </label>
+            <label>Amount:
+              <input type="number" id="wh-amount" required min="0">
+            </label>
+            <button type="submit">Отправить</button>
+          </form>
+          <p id="webhook-result"></p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 ArmenApp</p>
+    </div>
+  </footer>
+  <script src="/static/script.js"></script>
+</body>
+</html>
